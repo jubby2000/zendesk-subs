@@ -1,0 +1,45 @@
+<div class="update-subscriptions-container">
+  <mat-card [formGroup]="subscriptionForm">
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>Subscription</mat-card-title>
+      </mat-card-header>
+      <mat-form-field color="primary" appearance="outline" floatLabel="auto">
+        <mat-label>Plan</mat-label>
+        <mat-select formControlName="planOptionsControl">
+          <mat-option [value]="planOptions.basic">{{ planOptions.basic }}</mat-option>
+          <mat-option [value]="planOptions.good">{{ planOptions.good }}</mat-option>
+          <mat-option [value]="planOptions.better">{{ planOptions.better }}</mat-option>
+          <mat-option [value]="planOptions.best">{{ planOptions.best }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        hideRequiredMarker="true"
+        color="primary"
+        appearance="outline"
+        floatLabel="always"
+        [matTooltip]="getErrorMessage( seatsControl )"
+        matTooltipClass="tooltip-error"
+        matTooltipPosition="right"
+      >
+        <mat-label>Seats</mat-label>
+        <input
+          formControlName="seatsControl"
+          matInput
+          required
+          type="number"
+        >
+      </mat-form-field>
+      <h3>Price: ${{ currentCost?.toLocaleString( 'en' ) }}</h3>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="updateSubscription()"
+        [disabled]="subscriptionForm.invalid || subscriptionsUnchanged"
+        color="primary"
+        mat-raised-button
+      >Update Subscription</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-spinner color="accent" *ngIf="loading$ | async"></mat-spinner>
+</div>

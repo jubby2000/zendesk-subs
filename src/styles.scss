@@ -1,0 +1,5 @@
+@import './custom-theme.scss';
+
+.tooltip-error {
+  background: mat-color( $zendesk-subs-warn );
+}

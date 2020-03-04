@@ -1,0 +1,24 @@
+<div class="summary-container">
+  <div class="summary-card-container">
+    <subscription-summary-card
+      class="subscription-summary-card"
+      [name]="( prevSubscription$ | async )?.name"
+      [seats]="( prevSubscription$ | async )?.seats"
+      [cost]="( prevSubscription$ | async )?.cost"
+      [title]="'Previous Subscription'"
+    ></subscription-summary-card>
+    <subscription-summary-card
+      class="subscription-summary-card"
+      [name]="( currentSubscription$ | async )?.name"
+      [seats]="( currentSubscription$ | async )?.seats"
+      [cost]="( currentSubscription$ | async )?.cost"
+      [title]="'Updated Subscription'"
+      [planNameChanged]="( currentSubscription$ | async )?.name !== ( prevSubscription$ | async )?.name"
+      [seatsChanged]="( currentSubscription$ | async )?.seats !== ( prevSubscription$ | async )?.seats"
+    ></subscription-summary-card>
+  </div>
+  <a routerLink="/update-subscription">
+    <button mat-raised-button>Back</button>
+  </a>
+  <mat-spinner color="accent" *ngIf="loading$ | async"></mat-spinner>
+</div>
